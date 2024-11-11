@@ -1,0 +1,16 @@
+[필요 라이브러리]
+명령어 구조: npm install --save 라이브러리
+(또는 npm install 라이브러리)
+
+npm install --save bootstrap
+npm install --save reactstrap
+npm install --save react-bootstrap
+npm install --save react-router-dom
+npm install --save styled-components
+npm install --save axios
+npm install --save http-proxy-middleware
+npm install --save react-tradingview-widget
+npm install --save mdb-react-ui-kit
+
+[index.js에 react-bootstrap 적용을 위한 새 라이브러리 추가]
+import 'bootstrap/dist/css/bootstrap.css';
