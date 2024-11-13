@@ -110,8 +110,8 @@ const SectionAnalysisResult = () => {
               퍼스널 컬러는 <span style={{ color: 'skyblue', fontWeight: 'bold' }}>{analysisData?.personalColor || defaultAnalysisData.skinTone}</span> 입니다.
             </Card.Text>
             <Card.Text className="mt-3" style={{ fontSize: '2rem' }}>
-              추천 안경은 <span style={{ color: 'skyblue', fontWeight: 'bold' }}>{defaultAnalysisData.glassesFrame}</span>이며, <br />
-              추천 색상은 <span style={{ color: 'skyblue', fontWeight: 'bold' }}>{defaultAnalysisData.glassesColor}</span>입니다.
+              추천 안경 프레임은 <span style={{ color: 'skyblue', fontWeight: 'bold' }}>{analysisData?.glassesFrame||defaultAnalysisData.glassesFrame}</span>이며, <br />
+              추천 색상은 <span style={{ color: 'skyblue', fontWeight: 'bold' }}>{analysisData?.glassesColor||defaultAnalysisData.glassesColor}</span>입니다.
             </Card.Text>
           </Card.Body>
         </Card>
