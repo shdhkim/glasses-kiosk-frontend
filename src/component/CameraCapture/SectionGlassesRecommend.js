@@ -10,13 +10,15 @@ import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const SectionGlassesRecommend = () => {
-  const [glassesData, setGlassesData] = useState([]);
-  const [selectedGlasses, setSelectedGlasses] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [networkError, setNetworkError] = useState(false);
+  const [glassesData, setGlassesData] = useState([]); // 안경 데이터
+  const [userImage, setUserImage] = useState(null); // 사용자 이미지
+  const [selectedGlasses, setSelectedGlasses] = useState(null); // 선택된 안경
+  const [loading, setLoading] = useState(true); // 로딩 상태
+  const [networkError, setNetworkError] = useState(false); // 네트워크 오류 상태
+  const [imageError, setImageError] = useState(false); // 이미지 오류 상태
   const navigate = useNavigate();
-  const image = localStorage.getItem("image");
 
+  const defaultUserImage = '/default-user-image.jpg'; // 기본 사용자 이미지
   const defaultGlassesData = [
     {
       productName: 'DAM 01',
@@ -24,7 +26,7 @@ const SectionGlassesRecommend = () => {
       color: '검정색',
       price: '50000',
       image: '/default.png',
-      size: 'M'
+      size: 'M',
     },
     {
       productName: 'DAM 02',
@@ -32,23 +34,8 @@ const SectionGlassesRecommend = () => {
       color: '갈색',
       price: '60000',
       image: '/default2.png',
-      size: 'L'
+      size: 'L',
     },
-    {
-      productName: 'DAM 03',
-      brand: '드드',
-      color: '갈색',
-      price: '60000',
-      image: '/default2.png',
-      size: 'L'
-    },   {
-      productName: 'DAM 04',
-      brand: '드드',
-      color: '갈색',
-      price: '160000',
-      image: '/default2.png',
-      size: 'L'
-    }
   ];
 
   const fetchGlassesData = async () => {
@@ -56,10 +43,7 @@ const SectionGlassesRecommend = () => {
       setLoading(true);
       setNetworkError(false);
 
-      if (!localStorage.getItem('id')) {
-        localStorage.setItem('id', '1');
-      }
-      const id = localStorage.getItem('id');
+      const id = localStorage.getItem('id') || '1';
 
       const response = await axios.get(`/glasses/find/${id}`);
       const glassesList = response.data.data || [];
@@ -75,8 +59,26 @@ const SectionGlassesRecommend = () => {
     }
   };
 
+  const fetchUserImage = async () => {
+    try {
+      const userId = localStorage.getItem('id') || '1';
+
+      // 서버에서 Base64 이미지 요청
+      const response = await axios.get(`/user/image/send/${userId}`);
+      const base64Image = response.data.data;
+
+      // Base64 URL 생성
+      setUserImage(`data:image/jpeg;base64,${base64Image}`);
+    } catch (error) {
+      console.error('이미지 가져오기 오류:', error);
+      setImageError(true);
+      setUserImage(null); // 오류 시 기본 이미지 사용
+    }
+  };
+
   useEffect(() => {
     fetchGlassesData();
+    fetchUserImage(); // 사용자 이미지 가져오기
   }, []);
 
   const displayGlassesData = networkError || glassesData.length === 0 ? defaultGlassesData : glassesData;
@@ -94,13 +96,17 @@ const SectionGlassesRecommend = () => {
       <h1 className="text-center mb-4" style={{ marginTop: '70px', fontWeight: 'bold', fontSize: '2.5rem' }}>
         모델 추천
       </h1>
-      
-      {image && (
-        <div className="text-center mb-4">
-          <img src={image} alt="Captured" className="img-fluid" style={{ width: '600px', borderRadius: '8px' }} />
-        </div>
-      )}
-      
+
+      {/* 사용자 이미지 */}
+      <div className="text-center mb-4">
+        <img
+          src={userImage || defaultUserImage} // 사용자 이미지가 없으면 기본 이미지 사용
+          alt="User"
+          className="img-fluid"
+          style={{ width: '600px', borderRadius: '8px' }}
+        />
+      </div>
+
       {loading ? (
         <div className="d-flex justify-content-center">
           <Spinner animation="border" role="status" variant="primary" />
@@ -112,7 +118,7 @@ const SectionGlassesRecommend = () => {
             {displayGlassesData.map((glasses, index) => (
               <Col key={index} md={3} className="mb-3">
                 <img
-                  src={networkError ? glasses.image : `data:image/jpeg;base64,${glasses.image}`}
+                  src={networkError ? glasses.image : glasses.image} // 직접 URL 사용
                   alt={`Glasses ${index + 1}`}
                   className={`img-fluid ${selectedGlasses === glasses ? 'border border-primary' : ''}`}
                   style={{
@@ -134,7 +140,7 @@ const SectionGlassesRecommend = () => {
                 <Row style={{ marginBottom: '40px' }}>
                   <Col md={5} className="d-flex justify-content-center align-items-center">
                     <img
-                      src={networkError ? selectedGlasses.image : `data:image/jpeg;base64,${selectedGlasses.image}`}
+                      src={selectedGlasses.image} // 선택한 안경 이미지
                       alt={`Selected Glasses`}
                       className="img-fluid"
                       style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
@@ -153,15 +159,15 @@ const SectionGlassesRecommend = () => {
           )}
         </>
       )}
-      
+
       <div className="text-center mt-4">
-        <Button 
-          style={{ 
-            backgroundColor: 'purple', 
-            borderColor: 'purple', 
-            fontSize: '1.8rem', 
-            padding: '12px 20px', 
-          }} 
+        <Button
+          style={{
+            backgroundColor: 'purple',
+            borderColor: 'purple',
+            fontSize: '1.8rem',
+            padding: '12px 20px',
+          }}
           onClick={navigateToFeedback}
         >
           다시 추천하기

@@ -1,0 +1,30 @@
+name: Deploy React App to S3
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 푸시될 때 실행
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3  # 리포지토리 체크아웃
+
+    - name: Install dependencies
+      run: npm install  # 의존성 설치
+
+    - name: Build React app
+      run: npm run build  # React 앱 빌드
+
+    - name: Deploy to S3
+      uses: jakejarvis/s3-sync-action@v0.5.1
+      with:
+        args: --acl public-read --delete  # 객체 퍼블릭 읽기 및 삭제 동기화
+      env:
+        AWS_S3_BUCKET: your-s3-bucket-name  # S3 버킷 이름
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+        SOURCE_DIR: build  # 빌드된 React 앱 디렉터리
