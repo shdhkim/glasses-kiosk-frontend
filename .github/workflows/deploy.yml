@@ -25,6 +25,6 @@ jobs:
         args: --delete # '--acl public-read' 제거
       env:
         AWS_S3_BUCKET: sunglasseskiosk
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
         SOURCE_DIR: build
