@@ -13,7 +13,7 @@ import UserFeedBack from "./page/UserFeedBack";
 
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/">
             <Routes>
                 <Route index element={<Dash />} />
           
