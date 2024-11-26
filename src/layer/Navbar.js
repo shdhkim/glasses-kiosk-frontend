@@ -8,7 +8,7 @@ import {ButtonGroup} from "reactstrap";
 import {useState} from "react";
 import {useEffect} from "react";
 import axios from "axios";
-
+import { Link } from 'react-router-dom'; 
 function NavBar(props) {
 
     return (
