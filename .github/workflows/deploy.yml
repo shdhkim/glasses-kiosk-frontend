@@ -17,7 +17,7 @@ jobs:
       run: npm install  # 의존성 설치
 
     - name: Build React app
-      run: npm run build  # React 앱 빌드
+      run: CI=false npm run build # React 앱 빌드
 
     - name: Deploy to S3
       uses: jakejarvis/s3-sync-action@v0.5.1
