@@ -30,7 +30,9 @@ function NavBar(props) {
                             style={{ maxHeight: '100px'}}
                             navbarScroll
                         >
-                            <Nav.Link href="/cameracapture" style={{ fontSize: '1.5rem' }}>사진촬영</Nav.Link>
+                          <Nav.Link as={Link} to="/cameracapture" style={{ fontSize: '1.5rem' }}>
+                          사진촬영
+                        </Nav.Link>
                         </Nav>
                         <ButtonGroup style={{ marginRight: "100px" }}>
                             <Button href={"/"} style={{ color: "white", fontWeight: "bold", background:"black", borderColor:"black" }}>
