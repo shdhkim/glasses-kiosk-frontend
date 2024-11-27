@@ -23,7 +23,7 @@ const SectionAnalysisResult = () => {
           localStorage.setItem('id', '1');
         }
         const id = localStorage.getItem('id');
-        const response = await axios.get(`user/find/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_API}/3/user/find/${id}`);
         const userDto = response.data?.data;
 
         setAnalysisData(userDto);

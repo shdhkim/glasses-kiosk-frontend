@@ -171,7 +171,7 @@ const SectionCameraCapture = () => {
         const blob = await fetch(croppedImage).then((res) => res.blob());
         formData.append('image', blob, 'captured_image.jpg');
 
-        await axios.post(`user/image/save/${id}`, formData, {
+        await axios.post(`${process.env.REACT_APP_API}/user/image/save/${id}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         console.log('이미지가 성공적으로 전송되었습니다. ID:', id);

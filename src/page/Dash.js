@@ -2,12 +2,13 @@ import React from "react";
 import GlobalStyle from "../GlobalStyle";
 import NavBar from "../layer/Navbar";
 import Card from "react-bootstrap/Card";
-import { MDBCol, MDBContainer, MDBRow, MDBCard } from "mdb-react-ui-kit";
+import { MDBCol, MDBRow, MDBCard } from "mdb-react-ui-kit";
 import ScrollToTopButton from "../layer/ScrollToTopButton";
-import Badge from 'react-bootstrap/Badge';
-import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function Dash(props) {
+    const navigate = useNavigate(); // useNavigate 훅 초기화
+
     return (
         <>
             <GlobalStyle />
@@ -19,7 +20,7 @@ function Dash(props) {
                         width: "100%",
                         height: "100vh",
                         backgroundImage: 'url("sunglasses.jpg")',
-                        backgroundSize: "cover",  // 화면을 사진으로 꽉 채우도록 설정
+                        backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
                     }}
@@ -30,14 +31,14 @@ function Dash(props) {
                     left: "50%",
                     transform: "translate(-50%, -50%)",
                     width: "100%",
-                    maxWidth: "800px",  // 카드의 최대 너비 설정
+                    maxWidth: "800px",
                     display: "flex",
                     justifyContent: "center",
                     zIndex: 1
                 }}>
                     <Card style={{
                         width: "100%",
-                        maxWidth: "95%",  // 화면 너비의 95%까지 넓힘
+                        maxWidth: "95%",
                         height: "400px",
                         position: "relative",
                         boxShadow: "10px 10px 8px rgba(0, 0, 0, 0.1)"
@@ -74,10 +75,10 @@ function Dash(props) {
                                             <MDBCard floating
                                                 className={'m-1'}
                                                 style={{
-                                                    width: "70px",  // 카드의 너비와 높이를 동일하게 설정
+                                                    width: "70px",
                                                     height: "70px",
                                                     background: "white",
-                                                    borderRadius: "50%",  // 완전한 원 형태로 설정
+                                                    borderRadius: "50%",
                                                     padding: "10px",
                                                     border: "2px solid black",
                                                     display: "flex",
@@ -85,12 +86,12 @@ function Dash(props) {
                                                     alignItems: "center",
                                                     transition: "background 0.3s"
                                                 }}
-                                                onClick={() => { window.location.href = 'https://192.168.35.30:3000/cameracapture' }}
+                                                onClick={() => { navigate('/cameracapture'); }} // 내부 라우팅으로 변경
                                                 onMouseEnter={(e) => { e.currentTarget.style.background = "gray"; }}
                                                 onMouseLeave={(e) => { e.currentTarget.style.background = "white"; }}>
                                                 <img alt={""} src={"camera.png"} width={"50"} height={"50"} />
                                             </MDBCard>
-                                            <p><strong  style={{ fontSize: '1.2rem' }} >사진촬영</strong></p>
+                                            <p><strong style={{ fontSize: '1.2rem' }}>사진촬영</strong></p>
                                         </MDBCol>
                                     </MDBRow>
                                 </div>

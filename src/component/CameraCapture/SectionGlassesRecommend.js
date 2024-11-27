@@ -45,7 +45,7 @@ const SectionGlassesRecommend = () => {
 
       const id = localStorage.getItem('id') || '1';
 
-      const response = await axios.get(`/glasses/find/${id}`);
+      const response = await axios.get(`${process.env.REACT_APP_API}/glasses/find/${id}`);
       const glassesList = response.data.data || [];
       setGlassesData(glassesList);
       setSelectedGlasses(glassesList[0] || defaultGlassesData[0]);
@@ -64,7 +64,7 @@ const SectionGlassesRecommend = () => {
       const userId = localStorage.getItem('id') || '1';
 
       // 서버에서 Base64 이미지 요청
-      const response = await axios.get(`/user/image/send/${userId}`);
+      const response = await axios.get(`${process.env.REACT_APP_API}/user/image/send/${userId}`);
       const base64Image = response.data.data;
 
       // Base64 URL 생성
