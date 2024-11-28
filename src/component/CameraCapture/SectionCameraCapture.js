@@ -102,12 +102,13 @@ const SectionCameraCapture = () => {
           };
 
          
+          const margin = 200; // 허용 범위 확장
           if (
-            faceBox.x >= guideCenter.x &&
-            faceBox.y >= guideCenter.y &&
-            faceBox.x + faceBox.width <= guideCenter.x + guideSize &&
-            faceBox.y + faceBox.height <= guideCenter.y + guideSize
-          ) {
+            faceBox.x >= guideCenter.x - margin &&
+            faceBox.y >= guideCenter.y - margin &&
+            faceBox.x + faceBox.width <= guideCenter.x + guideSize + margin &&
+            faceBox.y + faceBox.height <= guideCenter.y + guideSize + margin
+          ){
             cropFace(image, faceBox);
           } else {
             console.warn('얼굴이 가이드라인 내에 있지 않습니다.');
@@ -171,7 +172,7 @@ const SectionCameraCapture = () => {
         const blob = await fetch(croppedImage).then((res) => res.blob());
         formData.append('image', blob, 'captured_image.jpg');
 
-        await axios.post(`${process.env.REACT_APP_API}/user/image/save/${id}`, formData, {
+        await axios.post(`/user/image/save/${id}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         console.log('이미지가 성공적으로 전송되었습니다. ID:', id);

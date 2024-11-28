@@ -45,7 +45,7 @@ const SectionGlassesRecommend = () => {
 
       const id = localStorage.getItem('id') || '1';
 
-      const response = await axios.get(`${process.env.REACT_APP_API}/glasses/find/${id}`);
+      const response = await axios.get(`/glasses/find/${id}`);
       const glassesList = response.data.data || [];
       setGlassesData(glassesList);
       setSelectedGlasses(glassesList[0] || defaultGlassesData[0]);
@@ -64,7 +64,7 @@ const SectionGlassesRecommend = () => {
       const userId = localStorage.getItem('id') || '1';
 
       // 서버에서 Base64 이미지 요청
-      const response = await axios.get(`${process.env.REACT_APP_API}/user/image/send/${userId}`);
+      const response = await axios.get(`/user/image/send/${userId}`);
       const base64Image = response.data.data;
 
       // Base64 URL 생성
@@ -147,11 +147,13 @@ const SectionGlassesRecommend = () => {
                     />
                   </Col>
                   <Col md={7}>
-                    <h4 style={{ fontWeight: 'bold', fontSize: '2rem' }}>{selectedGlasses.productName}</h4>
+                  <h4 style={{ fontWeight: 'bold', fontSize: '2rem' }}>{selectedGlasses.model}</h4>
                     <Card.Text style={{ fontSize: '1.8rem', color: 'gold' }}>₩{selectedGlasses.price}</Card.Text>
                     <Card.Text style={{ fontSize: '1.8rem' }}>브랜드: {selectedGlasses.brand}</Card.Text>
                     <Card.Text style={{ fontSize: '1.8rem' }}>색상: {selectedGlasses.color}</Card.Text>
-                    <Card.Text style={{ fontSize: '1.8rem' }}>크기: {selectedGlasses.size || '정보 없음'}</Card.Text>
+                    <Card.Text style={{ fontSize: '1.8rem' }}>성분: {selectedGlasses.material || '정보 없음'}</Card.Text>
+                    <Card.Text style={{ fontSize: '1.8rem' }}>모양: {selectedGlasses.shape || '정보 없음'}</Card.Text>
+                    <Card.Text style={{ fontSize: '1.8rem' }}>무게: {selectedGlasses.weight || '정보 없음'}</Card.Text>
                   </Col>
                 </Row>
               </Card.Body>

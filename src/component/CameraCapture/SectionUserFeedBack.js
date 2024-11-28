@@ -20,7 +20,7 @@ const SectionUserFeedBack = () => {
       const feedback = feedbacks.join(', '); // 피드백을 문자열로 변환
 
         // 피드백을 userId와 함께 쿼리 파라미터로 전송
-        await axios.post(`${process.env.REACT_APP_API}/user/feedback/save`, null, {
+        await axios.post(`/user/feedback/save`, null, {
           params: {
             userId,
             feedback,

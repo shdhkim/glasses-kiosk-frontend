@@ -35,9 +35,7 @@ function NavBar(props) {
                         </Nav.Link>
                         </Nav>
                         <ButtonGroup style={{ marginRight: "100px" }}>
-                            <Button href={"/"} style={{ color: "white", fontWeight: "bold", background:"black", borderColor:"black" }}>
-                                D A V I C H
-                            </Button>
+                            
                         </ButtonGroup>
                     </Navbar.Collapse>
                 </Container>
