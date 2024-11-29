@@ -18,7 +18,7 @@ const SectionGlassesRecommend = () => {
   const [imageError, setImageError] = useState(false); // 이미지 오류 상태
   const navigate = useNavigate();
 
-  const defaultUserImage = '/default-user-image.jpg'; // 기본 사용자 이미지
+  const defaultUserImage = localStorage.getItem('image'); // 기본 사용자 이미지
   const defaultGlassesData = [
     {
       productName: 'DAM 01',
@@ -118,7 +118,7 @@ const SectionGlassesRecommend = () => {
             {displayGlassesData.map((glasses, index) => (
               <Col key={index} md={3} className="mb-3">
                 <img
-                  src={networkError ? glasses.image : glasses.image} // 직접 URL 사용
+                  src={networkError ? glasses.image_path : glasses.image_path} // 직접 URL 사용
                   alt={`Glasses ${index + 1}`}
                   className={`img-fluid ${selectedGlasses === glasses ? 'border border-primary' : ''}`}
                   style={{
@@ -140,7 +140,7 @@ const SectionGlassesRecommend = () => {
                 <Row style={{ marginBottom: '40px' }}>
                   <Col md={5} className="d-flex justify-content-center align-items-center">
                     <img
-                      src={selectedGlasses.image} // 선택한 안경 이미지
+                      src={selectedGlasses.image_path} // 선택한 안경 이미지
                       alt={`Selected Glasses`}
                       className="img-fluid"
                       style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
