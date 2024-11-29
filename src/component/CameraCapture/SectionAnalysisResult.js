@@ -109,7 +109,10 @@ const SectionAnalysisResult = () => {
               고객님의 얼굴 모양은 <span style={{ color: 'skyblue', fontWeight: 'bold' }}>{analysisData?.faceShape || defaultAnalysisData.faceShape}</span>이고, <br />
               퍼스널 컬러는 <span style={{ color: 'skyblue', fontWeight: 'bold' }}>{analysisData?.personalColor || defaultAnalysisData.skinTone}</span> 입니다.
             </Card.Text>
-           
+            <Card.Text className="mt-3" style={{ fontSize: '2rem' }}>
+              추천 안경 프레임은 <span style={{ color: 'skyblue', fontWeight: 'bold' }}>{analysisData?.glassesFrame || defaultAnalysisData.glassesFrame}</span>이고, <br />
+              추천 색상은 <span style={{ color: 'skyblue', fontWeight: 'bold' }}>{analysisData?.glassesColor || defaultAnalysisData.glassesColor}</span> 입니다.
+            </Card.Text>
           </Card.Body>
         </Card>
       )}
