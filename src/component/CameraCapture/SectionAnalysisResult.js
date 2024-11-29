@@ -59,25 +59,25 @@ const SectionAnalysisResult = () => {
 
     return (
       <div className="d-flex flex-row justify-content-center align-items-center gap-3">
-        {/* 얼굴형이 '각진형'일 때만 얼굴형 이미지를 표시 */}
-        {(analysisData?.faceShape === '각진형' || (!analysisData?.faceShape && defaultAnalysisData.faceShape === '각진형')) && (
+        
+        
           <div className="text-center" style={{ border: '3px solid blue', borderRadius: '8px', padding: '5px', width: '130px', height: '130px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <img src="/angular.png" alt="Angular Shape" className="img-fluid" style={{ width: '60px', margin: '0 auto' }} />
             <p style={{ color: 'blue', fontWeight: 'bold', marginTop: '5px', fontSize: '1.6rem' }}>
               {analysisData?.faceShape || defaultAnalysisData.faceShape}
             </p>
           </div>
-        )}
         
-        {/* 피부톤이 '쿨톤'일 때만 피부톤 이미지를 표시 */}
-        {(analysisData?.personalColor === '쿨톤' || (!analysisData?.personalColor && defaultAnalysisData.skinTone === '쿨톤')) && (
+        
+        
+        
           <div className="text-center" style={{ border: '3px solid blue', borderRadius: '8px', padding: '5px', width: '130px', height: '130px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <img src="/cool.png" alt="Cool Tone" className="img-fluid" style={{ width: '60px', margin: '0 auto' }} />
             <p style={{ color: 'blue', fontWeight: 'bold', marginTop: '5px', fontSize: '1.6rem' }}>
               {analysisData?.personalColor || defaultAnalysisData.skinTone}
             </p>
           </div>
-        )}
+        
       </div>
     );};
   return (
