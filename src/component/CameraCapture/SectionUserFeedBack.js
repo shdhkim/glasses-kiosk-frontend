@@ -5,10 +5,12 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Spinner from 'react-bootstrap/Spinner';
 
 const SectionUserFeedBack = () => {
   const [feedback, setFeedback] = useState('');
   const [feedbackList, setFeedbackList] = useState([]);
+  const [loading, setLoading] = useState(false); // 로딩 상태 관리
   const navigate = useNavigate();
 
   const sendFeedbackToBackend = async (feedbacks) => {
@@ -19,13 +21,13 @@ const SectionUserFeedBack = () => {
       const userId = localStorage.getItem('id');
       const feedback = feedbacks.join(', '); // 피드백을 문자열로 변환
 
-        // 피드백을 userId와 함께 쿼리 파라미터로 전송
-        await axios.post(`/user/feedback/save`, null, {
-          params: {
-            userId,
-            feedback,
-          },
-        });
+      // 피드백을 userId와 함께 쿼리 파라미터로 전송
+      await axios.post(`/user/feedback/save`, null, {
+        params: {
+          userId,
+          feedback,
+        },
+      });
       console.log('피드백이 성공적으로 전송되었습니다.');
     } catch (error) {
       console.error('피드백 전송 오류:', error);
@@ -41,7 +43,9 @@ const SectionUserFeedBack = () => {
 
   const handleSubmit = async () => {
     if (feedbackList.length > 0) {
+      setLoading(true); // 로딩 시작
       await sendFeedbackToBackend(feedbackList);
+      setLoading(false); // 로딩 종료
       setFeedbackList([]);
       navigate('/glassesrecommend');
     }
@@ -55,25 +59,42 @@ const SectionUserFeedBack = () => {
     setFeedbackList((prevList) => prevList.filter((_, i) => i !== index));
   };
 
+  const handleExampleFeedbackClick = (exampleFeedback) => {
+    setFeedbackList((prevList) => {
+      if (!prevList.includes(exampleFeedback)) {
+        return [...prevList, exampleFeedback];
+      }
+      return prevList; // 중복 방지
+    });
+  };
+
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-4" style={{ marginTop: '80px',fontWeight: 'bold', fontSize: '2.5rem' }}>사용자 피드백</h1>
-      <p className="text-center mb-4" style={{ marginTop: '40px',fontSize: '2rem' }}>당신의 의견을 들려주세요. AI가 더 알맞은 모델을 재추천해드립니다.</p>
-      
+      <h1 className="text-center mb-4" style={{ marginTop: '80px', fontWeight: 'bold', fontSize: '2.5rem' }}>
+        사용자 피드백
+      </h1>
+      <p className="text-center mb-4" style={{ marginTop: '40px', fontSize: '2rem' }}>
+        당신의 의견을 들려주세요. AI가 더 알맞은 모델을 재추천해드립니다.
+      </p>
+
       <Card className="mb-4">
         <Card.Body>
-          <Card.Title style={{ marginTop: '50px',marginBottom: '50px',fontSize: '2rem' }}>🔥 많이 하는 피드백</Card.Title>
+          <Card.Title style={{ marginTop: '50px', marginBottom: '50px', fontSize: '2rem' }}>🔥 많이 하는 피드백</Card.Title>
           <ListGroup variant="flush">
-            <ListGroup.Item style={{ fontSize: '1.8rem' }}>크기가 커요</ListGroup.Item>
-            <ListGroup.Item style={{ fontSize: '1.8rem' }}>재질이 마음에 안들어요</ListGroup.Item>
-            <ListGroup.Item style={{ fontSize: '1.8rem' }}>가격이 부담스러워요</ListGroup.Item>
-            <ListGroup.Item style={{ fontSize: '1.8rem' }}>안경테가 두꺼워요</ListGroup.Item>
-            <ListGroup.Item style={{ fontSize: '1.8rem',marginBottom: '70px' }}>다른 색상으로 추천해주세요</ListGroup.Item>
+            {['크기가 커요', '재질이 마음에 안들어요', '가격이 부담스러워요', '안경테가 두꺼워요', '다른 색상으로 추천해주세요'].map((example, index) => (
+              <ListGroup.Item
+                key={index}
+                style={{ fontSize: '1.8rem', cursor: 'pointer' }}
+                onClick={() => handleExampleFeedbackClick(example)}
+              >
+                {example}
+              </ListGroup.Item>
+            ))}
           </ListGroup>
         </Card.Body>
       </Card>
 
-      <Form className="mb-3" style={{ marginTop: '70px'}} >
+      <Form className="mb-3" style={{ marginTop: '70px' }}>
         <Form.Group controlId="feedbackInput">
           <Form.Control
             type="text"
@@ -97,7 +118,7 @@ const SectionUserFeedBack = () => {
         <Card className="mb-4">
           <Card.Body>
             <Card.Title style={{ fontSize: '1.8rem' }}>등록된 피드백</Card.Title>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
               {feedbackList.map((item, index) => (
                 <div
                   key={index}
@@ -107,7 +128,7 @@ const SectionUserFeedBack = () => {
                     minWidth: '160px',
                     maxWidth: '250px',
                     fontSize: '1.2rem',
-                    textAlign: 'center'
+                    textAlign: 'center',
                   }}
                 >
                   {item}
@@ -130,8 +151,15 @@ const SectionUserFeedBack = () => {
         style={{ backgroundColor: 'purple', borderColor: 'purple', fontSize: '2rem', padding: '12px 18px' }}
         onClick={handleSubmit}
         className="w-100 mt-3"
+        disabled={loading} // 로딩 중 버튼 비활성화
       >
-        다시 추천받기
+        {loading ? (
+          <>
+            <Spinner animation="border" size="sm" role="status" aria-hidden="true" /> 피드백 반영 중...
+          </>
+        ) : (
+          '다시 추천받기'
+        )}
       </Button>
     </div>
   );

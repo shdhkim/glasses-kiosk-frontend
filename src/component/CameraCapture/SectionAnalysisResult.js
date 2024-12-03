@@ -93,13 +93,13 @@ const SectionAnalysisResult = () => {
           <Spinner animation="border" variant="primary" role="status" className="mb-3">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
-          <p className="text-center" style={{ fontSize: '2rem' }}>
+          <p className="text-center" style={{ fontSize: '2.5rem' }}>
             잠시만 기다려주세요... <br />
             내게 꼭 맞는 안경 모델을 AI가 찾고 있어요!
           </p>
-          <p className="text-muted" style={{ fontSize: '1.8rem' }}>얼굴형 분석 중</p>
-          <p className="text-muted" style={{ fontSize: '1.8rem' }}>피부톤 분석 중</p>
-          <p className="text-muted" style={{ fontSize: '1.8rem' }}>안경모델과 매칭 중</p>
+          <p className="text-muted" style={{ fontSize: '2rem' }}>얼굴형 분석 중</p>
+          <p className="text-muted" style={{ fontSize: '2rem' }}>피부톤 분석 중</p>
+          <p className="text-muted" style={{ fontSize: '2rem' }}>안경모델과 매칭 중</p>
         </div>
       ) : (
         <Card className="text-center p-4">

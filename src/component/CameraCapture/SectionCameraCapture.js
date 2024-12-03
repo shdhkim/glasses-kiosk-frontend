@@ -15,9 +15,10 @@ const SectionCameraCapture = () => {
   const [capturing, setCapturing] = useState(false);
   const [countdown, setCountdown] = useState(null);
   const [modelsLoaded, setModelsLoaded] = useState(false);
+  const [analysisLoading, setAnalysisLoading] = useState(false);
   const navigate = useNavigate();
 
-  const guideSize = 600; 
+  const guideSize = 600;
 
   useEffect(() => {
     if (!localStorage.getItem('id')) {
@@ -30,7 +31,7 @@ const SectionCameraCapture = () => {
         await Promise.all([
           faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
           faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-          faceapi.nets.faceRecognitionNet.loadFromUri('/models')
+          faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
         ]);
         setModelsLoaded(true);
       } catch (error) {
@@ -80,8 +81,11 @@ const SectionCameraCapture = () => {
     const img = new Image();
     img.src = image;
     img.onload = async () => {
-      const inputSize = 256; 
-      const options = new faceapi.TinyFaceDetectorOptions({ inputSize, scoreThreshold: 0.5 });
+      const inputSize = 256;
+      const options = new faceapi.TinyFaceDetectorOptions({
+        inputSize,
+        scoreThreshold: 0.5,
+      });
 
       try {
         const detections = await faceapi
@@ -101,14 +105,13 @@ const SectionCameraCapture = () => {
             y: img.height / 2 - guideSize / 2,
           };
 
-         
-          const margin = 200; // 허용 범위 확장
+          const margin = 200;
           if (
             faceBox.x >= guideCenter.x - margin &&
             faceBox.y >= guideCenter.y - margin &&
             faceBox.x + faceBox.width <= guideCenter.x + guideSize + margin &&
             faceBox.y + faceBox.height <= guideCenter.y + guideSize + margin
-          ){
+          ) {
             cropFace(image, faceBox);
           } else {
             console.warn('얼굴이 가이드라인 내에 있지 않습니다.');
@@ -131,10 +134,10 @@ const SectionCameraCapture = () => {
     img.onload = () => {
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
-      
+
       canvas.width = box.width;
       canvas.height = box.height;
-      
+
       context.drawImage(
         img,
         box.x,
@@ -146,9 +149,9 @@ const SectionCameraCapture = () => {
         box.width,
         box.height
       );
-      
+
       const croppedImageUrl = canvas.toDataURL('image/jpeg');
-      setCroppedImage(croppedImageUrl); 
+      setCroppedImage(croppedImageUrl);
     };
   };
 
@@ -165,6 +168,7 @@ const SectionCameraCapture = () => {
   const goToAnalysisResult = async () => {
     if (croppedImage) {
       try {
+        setAnalysisLoading(true);
         const id = parseInt(localStorage.getItem('id')) + 1;
         localStorage.setItem('id', id.toString());
 
@@ -175,12 +179,12 @@ const SectionCameraCapture = () => {
         await axios.post(`/user/image/save/${id}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
-        console.log('이미지가 성공적으로 전송되었습니다. ID:', id);
 
         navigate('/analysisresult', { state: { image: croppedImage } });
       } catch (error) {
         console.error('이미지 전송 오류:', error);
-        navigate('/analysisresult', { state: { image: croppedImage } });
+      } finally {
+        setAnalysisLoading(false);
       }
     }
   };
@@ -192,32 +196,72 @@ const SectionCameraCapture = () => {
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       ) : croppedImage ? (
-        <div className="text-center">
-          <h1 className="position-fixed start-50 translate-middle-x" style={{ top: '10%', fontWeight: 'bold', fontSize: '2.5rem', zIndex: 10 }}>
-            촬영 사진
-          </h1>
-          <img
-            src={croppedImage}
-            alt="인식된 얼굴 이미지"
-            className="img-fluid"
-            style={{ marginTop: '100px', width: '650px', height: '650px' }}
-          />
-          <div className="mt-3">
-          <p style={{ fontSize: '2rem', marginTop: '50px', color: 'skyblue', fontWeight: 'bold' }}>
-              얼굴이 흔들렸거나 다시 찍고 싶다면 재촬영 버튼을 눌러주세요.
+        analysisLoading ? (
+          <div className="d-flex flex-column align-items-center">
+            <Spinner animation="border" variant="primary" role="status" className="mb-3">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+            <p className="text-center" style={{ fontSize: '2.5rem' }}>
+              잠시만 기다려주세요... <br />
+              내게 꼭 맞는 안경 모델을 AI가 찾고 있어요!
             </p>
-            <Button variant="secondary" className="me-2" style={{ fontSize: '1.5rem', marginTop: '50px' }} onClick={retakePhoto}>다시 찍기</Button>
-            <Button variant="primary" style={{ fontSize: '1.5rem', marginTop: '50px' }} onClick={goToAnalysisResult}>분석 결과 보기</Button>
+            <p className="text-muted" style={{ fontSize: '2rem' }}>얼굴형 분석 중</p>
+            <p className="text-muted" style={{ fontSize: '2rem' }}>피부톤 분석 중</p>
+            <p className="text-muted" style={{ fontSize: '2rem' }}>안경모델과 매칭 중</p>
           </div>
-        </div>
+        ) : (
+          <div className="text-center">
+            <h1 className="position-fixed start-50 translate-middle-x" style={{ top: '10%', fontWeight: 'bold', fontSize: '2.5rem', zIndex: 10 }}>
+              촬영 사진
+            </h1>
+            <img
+              src={croppedImage}
+              alt="인식된 얼굴 이미지"
+              className="img-fluid"
+              style={{ marginTop: '100px', width: '650px', height: '650px' }}
+            />
+            <div className="mt-3">
+              <p style={{ fontSize: '2rem', marginTop: '50px', color: 'skyblue', fontWeight: 'bold' }}>
+                얼굴이 흔들렸거나 다시 찍고 싶다면 재촬영 버튼을 눌러주세요.
+              </p>
+              <Button
+                variant="secondary"
+                className="me-2"
+                style={{ fontSize: '1.5rem', marginTop: '50px' }}
+                onClick={retakePhoto}
+              >
+                다시 찍기
+              </Button>
+              <Button
+                variant="primary"
+                style={{ fontSize: '1.5rem', marginTop: '50px' }}
+                onClick={goToAnalysisResult}
+              >
+                분석 결과 보기
+              </Button>
+            </div>
+          </div>
+        )
       ) : (
         <>
-          <h1 className="position-fixed start-50 translate-middle-x" style={{ top: '10%', color: 'white', fontWeight: 'bold', fontSize: '2.5rem', zIndex: 10 }}>
+          <h1
+            className="position-fixed start-50 translate-middle-x"
+            style={{
+              top: '10%',
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '2.5rem',
+              zIndex: 10,
+            }}
+          >
             사진 촬영
           </h1>
-          <Webcam audio={false} ref={webcamRef} screenshotFormat="image/jpeg" style={{ width: '100vw', height: '100vh', objectFit: 'cover' }} />
-          
-          
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            style={{ width: '100vw', height: '100vh', objectFit: 'cover' }}
+          />
           <div
             className="position-absolute"
             style={{
@@ -230,19 +274,38 @@ const SectionCameraCapture = () => {
               zIndex: 10,
             }}
           ></div>
-
           {countdown !== null && (
-            <h2 className="position-absolute top-50 start-50 translate-middle text-danger" style={{ fontSize: '4rem', fontWeight: 'bold' }}>
+            <h2
+              className="position-absolute top-50 start-50 translate-middle text-danger"
+              style={{ fontSize: '4rem', fontWeight: 'bold' }}
+            >
               {countdown}
             </h2>
           )}
-           <p style={{ fontSize: '2rem', marginTop: '20px',  marginBottom: '50px',color: 'skyblue', fontWeight: 'bold', position: 'absolute', bottom: '80px', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', zIndex: 10 }}>
+          <p
+            style={{
+              fontSize: '2rem',
+              marginTop: '20px',
+              marginBottom: '50px',
+              color: 'skyblue',
+              fontWeight: 'bold',
+              position: 'absolute',
+              bottom: '80px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              textAlign: 'center',
+              zIndex: 10,
+            }}
+          >
             가이드라인에 얼굴을 맞추고 정면을 바라봐주세요.
           </p>
-          
           <Button
             className="position-absolute bottom-0 mb-5 start-50 translate-middle-x"
-            style={{ backgroundColor: 'purple', borderColor: 'purple', fontSize: '1.5rem' }}
+            style={{
+              backgroundColor: 'purple',
+              borderColor: 'purple',
+              fontSize: '1.5rem',
+            }}
             size="lg"
             onClick={startCapture}
             disabled={capturing || imageSrc || !modelsLoaded}

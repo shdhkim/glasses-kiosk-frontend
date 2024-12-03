@@ -11,29 +11,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const SectionGlassesRecommend = () => {
   const [glassesData, setGlassesData] = useState([]); // 안경 데이터
-  const [userImage, setUserImage] = useState(null); // 사용자 이미지
-  const [selectedGlasses, setSelectedGlasses] = useState(null); // 선택된 안경
+  const [mixImages, setMixImages] = useState(null); // 합성 이미지 리스트
+  const [selectedIndex, setSelectedIndex] = useState(0); // 선택된 안경의 인덱스
   const [loading, setLoading] = useState(true); // 로딩 상태
+  const [mixImageLoading, setMixImageLoading] = useState(true); // 합성 이미지 로딩 상태
   const [networkError, setNetworkError] = useState(false); // 네트워크 오류 상태
-  const [imageError, setImageError] = useState(false); // 이미지 오류 상태
   const navigate = useNavigate();
 
-  const defaultUserImage = localStorage.getItem('image'); // 기본 사용자 이미지
+  const defaultUserImage = localStorage.getItem('image') || '/default-user.png'; // 기본 사용자 이미지
   const defaultGlassesData = [
     {
-      productName: 'DAM 01',
+      model: 'DAM 01',
       brand: '드드',
       color: '검정색',
       price: '50000',
-      image: '/default.png',
+      image_path: '/default.png',
       size: 'M',
     },
     {
-      productName: 'DAM 02',
+      model: 'DAM 02',
       brand: '드드',
       color: '갈색',
       price: '60000',
-      image: '/default2.png',
+      image_path: '/default2.png',
       size: 'L',
     },
   ];
@@ -45,115 +45,158 @@ const SectionGlassesRecommend = () => {
 
       const id = localStorage.getItem('id') || '1';
 
+      // 안경 정보 가져오기
       const response = await axios.get(`/glasses/find/${id}`);
       const glassesList = response.data.data || [];
-      setGlassesData(glassesList);
-      setSelectedGlasses(glassesList[0] || defaultGlassesData[0]);
+
+      setGlassesData(glassesList.length > 0 ? glassesList : defaultGlassesData);
     } catch (error) {
-      console.error('안경 데이터 가져오기 오류:', error);
+      console.error('안경 정보 가져오기 오류:', error);
       setNetworkError(true);
       setGlassesData(defaultGlassesData);
-      setSelectedGlasses(defaultGlassesData[0]);
     } finally {
       setLoading(false);
     }
   };
 
-  const fetchUserImage = async () => {
+  const fetchMixImages = async () => {
     try {
-      const userId = localStorage.getItem('id') || '1';
+      setMixImageLoading(true);
+      const id = localStorage.getItem('id') || '1';
 
-      // 서버에서 Base64 이미지 요청
-      const response = await axios.get(`/user/image/send/${userId}`);
-      const base64Image = response.data.data;
+      // 합성 이미지 리스트 가져오기
+      const response = await axios.get(`/user/image/send/${id}`);
+      const mixImagesList = response.data.data || null;
 
-      // Base64 URL 생성
-      setUserImage(`data:image/jpeg;base64,${base64Image}`);
+      setMixImages(mixImagesList);
     } catch (error) {
-      console.error('이미지 가져오기 오류:', error);
-      setImageError(true);
-      setUserImage(null); // 오류 시 기본 이미지 사용
+      console.error('합성 이미지 가져오기 오류:', error);
+      setMixImages(null); // 실패 시 null로 설정
+    } finally {
+      setMixImageLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchGlassesData();
-    fetchUserImage(); // 사용자 이미지 가져오기
+    fetchGlassesData(); // 안경 데이터 가져오기
+    fetchMixImages(); // 합성 이미지 가져오기
   }, []);
 
-  const displayGlassesData = networkError || glassesData.length === 0 ? defaultGlassesData : glassesData;
-
-  const handleGlassesSelect = (glasses) => {
-    setSelectedGlasses(glasses);
+  const handleGlassesSelect = (index) => {
+    setSelectedIndex(index); // 선택된 인덱스 설정
   };
 
   const navigateToFeedback = () => {
-    navigate('/userfeedback');
+    navigate('/userfeedback'); // 피드백 페이지로 이동
   };
 
   return (
     <Container className="my-5">
-      <h1 className="text-center mb-4" style={{ marginTop: '70px', fontWeight: 'bold', fontSize: '2.5rem' }}>
+      <h1
+        className="text-center mb-4"
+        style={{ marginTop: '70px', fontWeight: 'bold', fontSize: '2.5rem' }}
+      >
         모델 추천
       </h1>
 
-      {/* 사용자 이미지 */}
-      <div className="text-center mb-4">
-        <img
-          src={userImage || defaultUserImage} // 사용자 이미지가 없으면 기본 이미지 사용
-          alt="User"
-          className="img-fluid"
-          style={{ width: '600px', borderRadius: '8px' }}
-        />
-      </div>
-
-      {loading ? (
-        <div className="d-flex justify-content-center">
+      {loading || mixImageLoading ? (
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '300px' }}>
           <Spinner animation="border" role="status" variant="primary" />
+          <p className="ms-3" style={{ fontSize: '1.8rem', color: 'gray' }}>
+            추천 안경 정보를 가져오는 중입니다...
+          </p>
         </div>
       ) : (
         <>
+          {/* 사용자 이미지 및 합성 이미지 표시 */}
+          <div className="text-center mb-4">
+            <img
+              src={
+                mixImages && mixImages[selectedIndex]
+                  ? `data:image/png;base64,${mixImages[selectedIndex]}`
+                  : defaultUserImage // 합성 이미지 없으면 기본 사용자 이미지 표시
+              }
+              alt="User with Glasses"
+              className="img-fluid"
+              style={{ width: '600px', borderRadius: '8px' }}
+            />
+          </div>
+
           {/* 제품 갤러리 */}
           <Row className="justify-content-center mb-4">
-            {displayGlassesData.map((glasses, index) => (
+            {glassesData.map((glasses, index) => (
               <Col key={index} md={3} className="mb-3">
                 <img
-                  src={networkError ? glasses.image_path : glasses.image_path} // 직접 URL 사용
+                  src={glasses.image_path} // 기본 안경 이미지
                   alt={`Glasses ${index + 1}`}
-                  className={`img-fluid ${selectedGlasses === glasses ? 'border border-primary' : ''}`}
+                  className="img-fluid"
                   style={{
                     width: '100px',
                     height: '100px',
                     cursor: 'pointer',
                     borderRadius: '8px',
+                    border: selectedIndex === index ? '3px solid #007bff' : '2px solid #ccc',
+                    boxShadow:
+                      selectedIndex === index
+                        ? '0 4px 8px rgba(0, 123, 255, 0.4)'
+                        : '0 2px 4px rgba(0, 0, 0, 0.1)',
+                    transition: 'border 0.3s, background-color 0.3s, box-shadow 0.3s',
                   }}
-                  onClick={() => handleGlassesSelect(glasses)}
+                  onClick={() => handleGlassesSelect(index)}
                 />
               </Col>
             ))}
           </Row>
 
-          {/* 선택한 제품 정보 표시 */}
-          {selectedGlasses && (
+          {/* 선택된 제품 정보 */}
+          {glassesData[selectedIndex] && (
             <Card className="text-center p-4">
               <Card.Body>
-                <Row style={{ marginBottom: '40px' }}>
+                <Row>
                   <Col md={5} className="d-flex justify-content-center align-items-center">
                     <img
-                      src={selectedGlasses.image_path} // 선택한 안경 이미지
-                      alt={`Selected Glasses`}
+                      src={glassesData[selectedIndex].image_path} // 선택된 안경 기본 이미지
+                      alt="Selected Glasses"
                       className="img-fluid"
                       style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
                     />
                   </Col>
                   <Col md={7}>
-                  <h4 style={{ fontWeight: 'bold', fontSize: '2rem' }}>{selectedGlasses.model}</h4>
-                    <Card.Text style={{ fontSize: '1.8rem', color: 'gold' }}>₩{selectedGlasses.price}</Card.Text>
-                    <Card.Text style={{ fontSize: '1.8rem' }}>브랜드: {selectedGlasses.brand}</Card.Text>
-                    <Card.Text style={{ fontSize: '1.8rem' }}>색상: {selectedGlasses.color}</Card.Text>
-                    <Card.Text style={{ fontSize: '1.8rem' }}>성분: {selectedGlasses.material || '정보 없음'}</Card.Text>
-                    <Card.Text style={{ fontSize: '1.8rem' }}>모양: {selectedGlasses.shape || '정보 없음'}</Card.Text>
-                    <Card.Text style={{ fontSize: '1.8rem' }}>무게: {selectedGlasses.weight || '정보 없음'}</Card.Text>
+                  <h4
+  style={{
+    paddingRight: '360px',
+    fontWeight: 'bold',
+    fontSize: '2rem',
+    whiteSpace: 'nowrap', // 한 줄로 유지
+  
+  }}
+>
+  {glassesData[selectedIndex].model}
+</h4>
+                    <Card.Text style={{ fontSize: '1.8rem', color: 'gold' ,paddingRight: '360px' }}>
+                      ₩{glassesData[selectedIndex].price}
+                    </Card.Text>
+                    <Card.Text style={{ fontSize: '1.6rem' }}>
+                      브랜드: {glassesData[selectedIndex].brand}
+                    </Card.Text>
+                    <Card.Text style={{ fontSize: '1.6rem' }}>
+                      색상: {glassesData[selectedIndex].color}
+                    </Card.Text>
+                    <Card.Text style={{ fontSize: '1.6rem' }}>
+                      성분: {glassesData[selectedIndex].material || '정보 없음'}
+                    </Card.Text>
+                    <Card.Text style={{ fontSize: '1.6rem' }}>
+                      모양: {glassesData[selectedIndex].shape || '정보 없음'}
+                    </Card.Text>
+                    <Card.Text style={{ fontSize: '1.6rem' }}>
+                      무게: {glassesData[selectedIndex].weight ? `${glassesData[selectedIndex].weight}g` : '정보 없음'}
+                    </Card.Text>
+                    <Card.Text style={{ fontSize: '1.6rem' }}>
+                      렌즈 너비: {glassesData[selectedIndex].width ? `${glassesData[selectedIndex].width}mm` : '정보 없음'}
+                    </Card.Text>
+                    <Card.Text style={{ fontSize: '1.6rem' }}>
+                      렌즈 길이: {glassesData[selectedIndex].length ? `${glassesData[selectedIndex].length}mm` : '정보 없음'}
+                    </Card.Text>
                   </Col>
                 </Row>
               </Card.Body>
@@ -162,6 +205,7 @@ const SectionGlassesRecommend = () => {
         </>
       )}
 
+      {/* 피드백 버튼 */}
       <div className="text-center mt-4">
         <Button
           style={{
