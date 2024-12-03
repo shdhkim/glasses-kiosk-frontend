@@ -9,13 +9,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const SectionCameraCapture = () => {
   const webcamRef = useRef(null);
-  const [imageSrc, setImageSrc] = useState(null);
-  const [croppedImage, setCroppedImage] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [imageSrc, setImageSrc] = useState(null);  
+  const [croppedImage, setCroppedImage] = useState(null);  
+  const [loading, setLoading] = useState(true); // 페이지 로딩 여부
   const [capturing, setCapturing] = useState(false);
-  const [countdown, setCountdown] = useState(null);
-  const [modelsLoaded, setModelsLoaded] = useState(false);
-  const [analysisLoading, setAnalysisLoading] = useState(false);
+  const [countdown, setCountdown] = useState(null); // 남은 시간 체크
+  const [modelsLoaded, setModelsLoaded] = useState(false); //  모델 로딩 여부
+  const [analysisLoading, setAnalysisLoading] = useState(false); // 분석 로딩 여부
   const navigate = useNavigate();
 
   const guideSize = 600;
@@ -104,7 +104,7 @@ const SectionCameraCapture = () => {
             x: img.width / 2 - guideSize / 2,
             y: img.height / 2 - guideSize / 2,
           };
-
+          // 가이드 라인 체크
           const margin = 200;
           if (
             faceBox.x >= guideCenter.x - margin &&
@@ -169,12 +169,12 @@ const SectionCameraCapture = () => {
     if (croppedImage) {
       try {
         setAnalysisLoading(true);
-        const id = parseInt(localStorage.getItem('id')) + 1;
+        const id = parseInt(localStorage.getItem('id')) + 1; 
         localStorage.setItem('id', id.toString());
 
         const formData = new FormData();
         const blob = await fetch(croppedImage).then((res) => res.blob());
-        formData.append('image', blob, 'captured_image.jpg');
+        formData.append('image', blob, 'captured_image.jpg'); // 이미지 파일 폼데이터 이용
 
         await axios.post(`/user/image/save/${id}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
@@ -182,6 +182,7 @@ const SectionCameraCapture = () => {
 
         navigate('/analysisresult', { state: { image: croppedImage } });
       } catch (error) {
+        navigate('/analysisresult', { state: { image: croppedImage } });
         console.error('이미지 전송 오류:', error);
       } finally {
         setAnalysisLoading(false);

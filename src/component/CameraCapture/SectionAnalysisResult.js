@@ -19,8 +19,8 @@ const SectionAnalysisResult = () => {
       localStorage.setItem('image', image);
 
       try {
-        if (!localStorage.getItem('id')) {
-          localStorage.setItem('id', '1');
+        if (!localStorage.getItem('id')) {    // 로컬 스토리지에 id가 없을 경우 세팅
+          localStorage.setItem('id', '1'); 
         }
         const id = localStorage.getItem('id');
         const response = await axios.get(`/user/find/${id}`);
@@ -46,7 +46,7 @@ const SectionAnalysisResult = () => {
   };
 
   const goToRecommendationPage = () => {
-    navigate('/glassesrecommend');
+    navigate('/glassesrecommend'); // 페이지 넘어감
   };
 
   const renderImageBasedOnAnalysis = () => {
@@ -56,7 +56,7 @@ const SectionAnalysisResult = () => {
       glassesFrame = defaultAnalysisData.glassesFrame,
       glassesColor = defaultAnalysisData.glassesColor,
     } = analysisData || {};
-
+     // 데이터가 없을 시 기본값 사용
     return (
       <div className="d-flex flex-row justify-content-center align-items-center gap-3">
         
