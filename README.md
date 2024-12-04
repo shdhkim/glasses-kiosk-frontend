@@ -1,8 +1,9 @@
 <h1>2024-2 SW온캠퍼스인턴쉽 5팀 B조</h1>
 </p>
-<h1 align="middle">AI 안경 키오스크 앱 개발</h1>
-<h3 align="middle">얼굴형과 퍼스널 컬러에 따른 안경 추천 앱</h3>
-![SW온캠퍼스인턴쉽_포스터_5팀B조_이찬희](https://github.com/user-attachments/assets/ca98e0f9-bdaa-4508-8137-07dddd96b866)
+<h1>AI 안경 키오스크 앱 개발</h1>
+<h3>얼굴형과 퍼스널 컬러에 따른 안경 추천 앱</h3>
+
+![온캠퍼스인턴쉽 포스터사진](https://github.com/user-attachments/assets/61f6829a-9427-46c5-8526-ed9cd8141f33)
 
 <br/>
 
@@ -10,7 +11,7 @@
 
 |팀장|팀원|팀원|팀원|팀원|            
 | :---: | :---: | :---: | :---: | :---: | 
-|  |  |  |  |  |  
+|<img src="https://github.com/user-attachments/assets/c98b8b07-0476-4163-bee1-1b83a91f9a54" width="150" height="150"/>|<img src="https://github.com/user-attachments/assets/3cdccdad-64dd-48ca-b2f1-2491c238fec6" width="150" height="150"/>|<img src="https://github.com/user-attachments/assets/85392a15-65d6-4560-8cb7-443058c31fca" width="150" height="150"/>|<img src="https://github.com/user-attachments/assets/d0214ae1-b903-411e-974c-190afc63084c" width="150" height="150"/>|<img src="https://github.com/user-attachments/assets/3a0a5b76-7636-4596-b59f-4591d18d290e" width="150" height="150"/>|  
 |[이찬희](https://github.com/llleeco)|[신경환](https://github.com/shinkyounghwan)|[김상헌](https://github.com/shdhkim)|[이지연](https://github.com/ljy6712)|[최리준](https://github.com/88nnn)| 
 
 ## 📝 작품소개
@@ -26,98 +27,91 @@
 실제로 매장에서 모든 안경을 착용해 보는 데는 한계가 있으며, 특히 대형 매장에서는 가격대별, 브랜드별로 나뉜 제품들을 선택하기 어려운 경우가 많습니다.
 저희는 이러한 소비자의 어려움을 해소하고, 맞춤형 추천 서비스를 통해 소비자의 만족도를 높이고자 이 애플리케이션을 개발하게 되었습니다.
 
-|서비스명|플랫폼 유형|특징|단점|
-|---|---|---|---|
-|아임 웹(Imweb)|WEB|개발에 전문적인 지식이 없어도 디자인 블록을 활용하여 웹사이트를 만들 수 있음.|웹사이트 개발에 맞추어져 있어 문서를 만드는 것에는 불필요.|
-|파워포인트 / 워드|WEB / EXE|다양한 문서를 만들 수 있는 기능을 제공.|작성할 수 있는 디자인 기능이 방대하여, 디자인에 어려움을 느끼는 학생들이 접근하기 어려움.|
-|잡코리아|WEB|취업에 알맞은 자소서를 작성할 수 있게 양식 제공.|취업에 특화된 웹사이트로 자기소개서 양식만을 제공.|
-|구글 문서|WEB|실시간으로 다수의 사용자와 수정 및 작성 가능.|제공되는 양식 및 디자인 도구가 매우 부족.|
-
-따라서 이 문제를 해결하기 위해 누구나 손쉽게 접근하여 자신만의 포트폴리오를 작성하는 웹 서비스를 제공하고자 합니다.  
-단순하게 포트폴리오를 만드는 기능뿐만 아니라 학과별 포트폴리오 양식을 제공하여 취업을 준비하고 있는 학생들에게 포트폴리오 작성의 애로사항을 줄여 줄 수 있을 것입니다.
-
 <br/>
 
-## 🎞 Demo
-[리드미 시연영상보기](https://www.youtube.com/watch?v=X-rooURijag)
+## 🎞 시연영상
+
+추가 예정.......
 
 <br/>
 
 ## ⭐ 주요 기능
-- **메인페이지** : 인기 포트폴리오, 전체 포트폴리오, 학과별 포트폴리오 제공
+- **시작 화면** :
+ 
+- **사진 촬영** : 
 
-![메인페이지](https://firebasestorage.googleapis.com/v0/b/fir-readme-storage.appspot.com/o/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-06-02%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.32.09.png?alt=media&token=b2d5b84a-eaf0-4f57-9e82-0dda2ee080cb)
+- **사진 분석** :
+  
+- **안경 모델 추천** : 
 
-- **양식 선택** : 새 양식, 기본 포트폴리오 양식 선택
-
-![선택페이지](https://firebasestorage.googleapis.com/v0/b/fir-readme-storage.appspot.com/o/Image%2Fselect.png?alt=media&token=05794943-9657-40bf-ad36-d3bdbb895d84)
-
-- **양식 미리보기** : 양식 미리보기 후 불러오기가 가능하며, 좋아요 기능 적용 
-
-![미리보기](https://firebasestorage.googleapis.com/v0/b/fir-readme-storage.appspot.com/o/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-06-02%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.52.47.png?alt=media&token=7502d5f5-a3c3-4193-a873-620747b7b070)
-
-- **양식 제작** : Drag&Drop 방식으로 이미지, 텍스트, 구분선, 표, 아이콘 등을 이용하여 포트폴리오 제작
-
-![제작페이지](https://firebasestorage.googleapis.com/v0/b/fir-readme-storage.appspot.com/o/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-06-02%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.53.28.png?alt=media&token=83162f3e-0802-4c65-863e-e907ca6979b3)
-
-- **양식 PDF저장/생성** : 생성한 양식을 PDF형식으로 저장 가능. 태그, 공개 여부, 썸네일 등을 추가하여 사이트에 업로드
-
-![저장페이지](https://firebasestorage.googleapis.com/v0/b/fir-readme-storage.appspot.com/o/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-06-02%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.54.47.png?alt=media&token=015f9d34-ed1f-4017-8de3-832fb026e0a2)
-
-- **양식 검색** : 제목이나 태그를 통해 포트폴리오 검색
-
-![검색페이지](https://firebasestorage.googleapis.com/v0/b/fir-readme-storage.appspot.com/o/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-06-02%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.55.21.png?alt=media&token=31460bdc-5cba-4274-a38c-e5a87566aecd)
-
-- **로그인/회원가입** : 유저의 학교,학과 데이터를 입력받아 포트폴리오 관리
-
-![로그인](https://firebasestorage.googleapis.com/v0/b/fir-readme-storage.appspot.com/o/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-06-02%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.38.38.png?alt=media&token=5e34c62b-f65b-469f-84fc-dca665bd96bc)
-
-- **마이페이지** : 유저정보, 좋아요 누른 포트폴리오, 자신의 포트폴리오 관리
-
-![마이페이지](https://firebasestorage.googleapis.com/v0/b/fir-readme-storage.appspot.com/o/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-06-02%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2010.46.10.png?alt=media&token=f6ba20e7-9aa8-440e-9bcf-021f0bd07490)
+- **피드백 입력** :
+  
+- **안경 모델 재추천** : 
 
 <br/>
 
 ## 🔨 프로젝트 구조
-![아키텍처](https://firebasestorage.googleapis.com/v0/b/fir-readme-storage.appspot.com/o/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-06-02%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.19.37.png?alt=media&token=79093ff3-9c0a-40fd-8721-f0fa54625694)
+![image](https://github.com/user-attachments/assets/93303e66-a44d-4be6-9a91-647e2da60d53)
+
 
 <br/>
 
-## 🔧 Stack
+## 📑 API 명세서
+![image](https://github.com/user-attachments/assets/60c37f73-44b9-4f40-a393-1e3635c06a62)
 
-**Frontend(Web)**
-- **Language** : JavaScript, TypeScript
-- **Library & Framework** : React, Styled-Components, Axios, Recoil, React-Quill, React-Rnd, React-To-Pdf
-- **Deploy**: AWS(S3)
+<br/>
+
+## 🔧 기술 스택
+
+**Frontend**
+
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![css](https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+
 <br />
 
-**Backend**
-- **Language** : Java 
-- **Library & Framework** : Spring Boot
-- **Database** : MySQLDB
-- **ORM** : JPA
-- **Deploy**: AWS(EC2, RDS), Firebase(Storage)
+**Backend-main**
+
+![java](https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white)
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
+![springboot](https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+![mysql](https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+
+<br />
+
+**Backend-AI**
+
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+![OpenCV](https://img.shields.io/badge/opencv-%23white.svg?style=for-the-badge&logo=opencv&logoColor=white)
+![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![milvus](https://img.shields.io/badge/milvus-00A1EA?style=for-the-badge&logo=milvus&logoColor=white)
 
 <br/>
+
+**소통**
+
+![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white)
+![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
+![Zoom](https://img.shields.io/badge/Zoom-2D8CFF?style=for-the-badge&logo=zoom&logoColor=white)
 
 ## 💡 기대효과
 
-**자신이 만든 포트폴리오 양식을 웹 사이트에서 관리 및 공유를 할 수 있어 인터넷에 연결만 되어 있다면 언제 어디서든 디자인을 할 수 있다.**
+**선택 용이성**: 얼굴형, 퍼스널 컬러 분석을 통한 적합한 안경 추천으로 선택 과정의 고민과 불확실성을 줄인다.
 
-**드래그 앤 드롭 (DND) 기술과 이를 활용하는 법에 대해 학습할 수 있다.**
+**구매 만족도 향상**: 개인 맞춤형 추천으로 고객 만족도와 매장 신뢰도가 상승된다. 
 
-**데이터 형성과 상태관리, 구축 기술, 서비스 배포에 대해 학습할 수 있다.**
+**매장 체류 시간 단축**: 안경에 대한 빠른 선택으로 고객 회전율이 증가된다.
 
-**RESTful API를 적용한 프론트엔드&백엔드 간의 통신을 학습할 수 있다.**
-
-<br/>
-
-## 👍 활용분야
-
-**편의성**: 학생과 취업준비생이 문서 형식에 구애받지 않고 손쉽게 포트폴리오 제작이 가능하다.
-
-**확장성**: 학생과 취업준비생 뿐만 아니라 기업 등의 고유 양식으로도 제공하여 다양한 분야에 활용할 수 있다.
-
-**수익성**: 사용자가 자신의 디자인을 판매해 수익을 창출할 수 있고 운영자는 판매 수수료를 통하여 수익 창출이 가능하다.
-
-**획일화된 양식**: 제출물을 하나의 디자인 양식으로 관리하여 자료를 분류 및 보관하는데 용이하다.                       
+**데이터 축적 및 활용**: 고객 선호 데이터를 활용하여 상품 기획을 최적화 할 수 있다.
