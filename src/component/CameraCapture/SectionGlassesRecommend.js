@@ -167,7 +167,7 @@ const SectionGlassesRecommend = () => {
     paddingRight: '360px',
     fontWeight: 'bold',
     fontSize: '2rem',
-    whiteSpace: 'nowrap', // 한 줄로 유지
+   
   
   }}
 >
