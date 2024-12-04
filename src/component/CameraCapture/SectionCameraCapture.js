@@ -206,9 +206,20 @@ const SectionCameraCapture = () => {
               잠시만 기다려주세요... <br />
               내게 꼭 맞는 안경 모델을 AI가 찾고 있어요!
             </p>
-            <p className="text-muted" style={{ fontSize: '2rem' }}>얼굴형 분석 중</p>
-            <p className="text-muted" style={{ fontSize: '2rem' }}>피부톤 분석 중</p>
-            <p className="text-muted" style={{ fontSize: '2rem' }}>안경모델과 매칭 중</p>
+            <div>
+  <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
+    <img src="/check.jpg" alt="Check" style={{ width: '3rem', height: '3rem', marginRight: '1rem', marginTop: '-0.9rem' }} />
+    <p className="text-muted" style={{ fontSize: '2rem' }}>얼굴형 분석 중</p>
+  </div>
+  <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
+    <img src="/check.jpg" alt="Check" style={{ width: '3rem', height: '3rem', marginRight: '1rem', marginTop: '-0.9rem'}} />
+    <p className="text-muted" style={{ fontSize: '2rem' }}>피부톤 분석 중</p>
+  </div>
+  <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
+    <img src="/check.jpg" alt="Check" style={{ width: '3rem', height: '3rem', marginRight: '1rem', marginTop: '-0.9rem' }} />
+    <p className="text-muted" style={{ fontSize: '2rem' }}>안경모델과 매칭 중</p>
+  </div>
+</div>
           </div>
         ) : (
           <div className="text-center">
