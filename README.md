@@ -5,6 +5,11 @@
 
 ![온캠퍼스인턴쉽 포스터사진](https://github.com/user-attachments/assets/61f6829a-9427-46c5-8526-ed9cd8141f33)
 
+[FRONTEND github 링크](https://github.com/shdhkim/glasses-kiosk-frontend)
+
+[BACKEND-main github 링크](https://github.com/shinkyounghwan/glasses-kiosk)
+
+[BACKEND-AI gighub 링크](https://github.com/llleeco/SWIntership_flask)
 <br/>
 
 ## 🙋‍♂️ 팀원소개
@@ -36,18 +41,60 @@
 <br/>
 
 ## ⭐ 주요 기능
-- **시작 화면** :
- 
-- **사진 촬영** : 
 
-- **사진 분석** :
+### [초기 화면]
+|초기 화면|
+|:------:|
+|<img src="https://github.com/user-attachments/assets/96846fef-a7c1-4b68-9277-2246c268f21b" width="540" height="720"/>|
+- **[초기 화면 페이지] 입니다. 상단에 [홈]버튼을 클릭하면 초기화면으로 돌아올 수 있습니다.**
+- **가운데 [사진촬영]버튼을 클릭하면 사진촬영 화면으로 넘어 갈 수 있습니다.**
+### [사진 촬영]
+|사진 촬영|
+|:------:|
+|<img src="https://github.com/user-attachments/assets/e1bfb8e0-748c-49ab-bb90-aa257b2ce340" width="540" height="720"/>|
+- **[사진 촬영 페이지] 입니다. 가이드라인에 맞추어 얼굴을 위치한 다음, 사진을 촬영할 수 있습니다.**
+- **사진이 마음에 들지 않을 경우, [다시 찍기]버튼을 클릭하여 재촬영 하거나, [분석 결과 보기]버튼을 클릭하여 사진 분석을 진행 할 수 있습니다.**
+### [사진 분석]
+|사진 분석|
+|:------:|
+|<img src="https://github.com/user-attachments/assets/965d9158-f99b-43fc-a509-2175a098f82a" width="540" height="720"/>|
+- **AI가 사진의 얼굴형, 피부톤(퍼스널컬러)을 분석합니다. 그리고 그에 맞는 안경 모델과 매칭합니다.**
+### [분석 결과]
+|분석 결과|
+|:------:|
+|<img src="https://github.com/user-attachments/assets/bf6d013c-e45b-4bac-8621-48edcd71544c" width="540" height="720"/>|
+- **사진을 바탕으로 분석한 얼굴형과 피부톤을 알려줍니다.**
+- **고객의 얼굴형과 피부톤을 바탕으로 안경 프레임과 안경 색상을 추천해 줍니다.**
+- **[추천 안경 보기]버튼을 클릭하면 고객의 얼굴에 가장 잘 어울리는 안경 모델을 추천해 줍니다.**
+### [안경 모델 추천]
+|안경 모델 추천|
+|:------:|
+|<img src="https://github.com/user-attachments/assets/a694063b-5216-45af-b491-96ad0bf2c7cb" width="540" height="720"/>|
+- **AI가 고객에게 가장 잘 어울리는 안경 모델을 찾습니다.**
+### [안경 모델 추천 결과]
+|안경 모델 추천 결과|
+|:------:|
+|<img src="https://github.com/user-attachments/assets/a8f18b4e-fa41-4271-aa8a-ffde77b4f5c9" width="540" height="720"/>|
+|<img src="https://github.com/user-attachments/assets/11af20ff-0d0c-41a3-85d6-d4ffa066fc8a" width="540" height="720"/>|
+- **고객에게 가장 잘 어울리는 안경을 추천 해 줍니다.**
+- **고객은 추천 받은 안경의 착용 이미지를 통해 본인에게 안경이 잘 어울리는지 확인 할 수 있습니다.**
+- **고객은 안경이 마음에 들지 않는 경우, [다시 추천하기]버튼을 클릭하여 피드백을 입력할 수 있습니다.**
+### [피드백 작성]
+|피드백 작성|
+|:------:|
+|<img src="https://github.com/user-attachments/assets/d01644ec-f834-43bc-b3b6-5b63b4e82cea" width="540" height="720"/>|  
+- **고객은 자유롭게 피드백을 입력하여 피드백을 등록 할 수 있습니다.**
+- **여러 피드백을 등록할 수도 있습니다.**
+- **피드백을 모두 등록한 경우, [다시 추천받기]버튼을 클릭하여 피드백을 통해 새로운 안경 모델을 추천 받을 수 있습니다.**
+### [안경 모델 재추천 결과]
+|안경 모델 재추천 결과|
+|:------:|
+|<img src="https://github.com/user-attachments/assets/c639257d-bd4b-491b-b94c-109ccae3f357" width="540" height="720"/>|
+|<img src="https://github.com/user-attachments/assets/904ae0a3-9bc7-4a54-a316-5ac7404b5bc9" width="540" height="720"/>|
+- **AI가 피드백을 바탕으로 고객에게 어울리는 새로운 안경을 3가지 추천 해 줍니다.**
+- **원하는 안경 모델을 클릭하면, 고객이 안경을 착용한 이미지와 안경 모델 정보를 확인 할 수 있습니다.**
+- **한번 더 마음에 들지 않는 경우, 다시한번 피드백을 입력하여 재추천 받을 수도 있습니다.**
   
-- **안경 모델 추천** : 
-
-- **피드백 입력** :
-  
-- **안경 모델 재추천** : 
-
 <br/>
 
 ## 🔨 프로젝트 구조
