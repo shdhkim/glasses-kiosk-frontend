@@ -9,7 +9,7 @@
 
 [BACKEND-main github 링크](https://github.com/shinkyounghwan/glasses-kiosk)
 
-[BACKEND-AI gighub 링크](https://github.com/llleeco/SWIntership_flask)
+[BACKEND-AI github 링크](https://github.com/llleeco/SWIntership_flask)
 <br/>
 
 ## 🙋‍♂️ 팀원소개
@@ -36,7 +36,7 @@
 
 ## 🎞 시연영상
 
-추가 예정.......
+[시연 영상 바로가기!!](https://youtu.be/CKYQcv3Zcl4)
 
 <br/>
 
