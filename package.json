@@ -1,7 +1,6 @@
-{
-  "name": "frontend",
+{  "name": "frontend",
   "version": "0.1.0",
-  "private": true,
+  "private": true, 
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
@@ -27,7 +26,7 @@
     "styled-components": "^6.1.8",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "http://localhost:8080", 
   "scripts": {
     "start": "craco start",
     "build": "craco build",

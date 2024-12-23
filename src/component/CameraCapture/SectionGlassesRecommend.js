@@ -21,10 +21,10 @@ const SectionGlassesRecommend = () => {
   const defaultUserImage = localStorage.getItem('image') || '/default-user.png'; // 기본 사용자 이미지
   const defaultGlassesData = [
     {
-      model: 'DAM 01',
+      model: 'DAM 01 dsdssdsd sdsdsdsdds dssdsdsdsddssdsd',
       brand: '드드',
       color: '검정색',
-      price: '50000',
+      price: '150000000',
       image_path: '/default.png',
       size: 'M',
     },
@@ -167,15 +167,14 @@ const SectionGlassesRecommend = () => {
     paddingRight: '360px',
     fontWeight: 'bold',
     fontSize: '2rem',
-   
   
   }}
 >
   {glassesData[selectedIndex].model}
 </h4>
-                    <Card.Text style={{ fontSize: '1.8rem', color: 'gold' ,paddingRight: '360px' }}>
-                      ₩{glassesData[selectedIndex].price}
-                    </Card.Text>
+<Card.Text style={{ fontSize: '1.8rem', color: 'gold', paddingRight: '360px', whiteSpace: 'nowrap' }}>
+  ₩{glassesData[selectedIndex].price}
+</Card.Text>
                     <Card.Text style={{ fontSize: '1.6rem' }}>
                       브랜드: {glassesData[selectedIndex].brand}
                     </Card.Text>
