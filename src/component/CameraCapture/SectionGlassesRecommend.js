@@ -21,10 +21,10 @@ const SectionGlassesRecommend = () => {
   const defaultUserImage = localStorage.getItem('image') || '/default-user.png'; // 기본 사용자 이미지
   const defaultGlassesData = [
     {
-      model: 'DAM 01 dsdssdsd sdsdsdsdds dssdsdsdsddssdsd',
+      model: 'DAM 01',
       brand: '드드',
       color: '검정색',
-      price: '150000000',
+      price: '15000',
       image_path: '/default.png',
       size: 'M',
     },
